@@ -72,6 +72,7 @@ Lets suppose we have a config for our server at `/etc/application-name/config`.
 In it we set the value of `server.port` and nothing else. We also execute our
 application below passing the flag `--debug true`. Our explanation object will
 contain the origin of each config key as shown below.
+
 ```javascript
 var milieu = require('milieu');
 
@@ -129,6 +130,7 @@ ENV variables are case insensitive.
 # API Docs
 
 ## milieuFactory
+
 ```
 milieuFactory(applicationName String, defaultConfig Object, opts Object) -> config Object
 ```
