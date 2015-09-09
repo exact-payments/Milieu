@@ -42,28 +42,31 @@ priority, and override config values in the sources below.
    `config.test.myKey === 'val'`
 0. config files (replace {appname} with the name of your application)
   (Accepts JSON, INI, or YAML) (File extensions are optional)
-  0. ~/.{appname}rc
-  0. ~/.{appname}/config
-  0. ~/.config/{appname}
-  0. ~/.config/{appname}/config
-  0. /etc/{appname}rc
-  0. /etc/{appname}/config
-  0. /usr/local/etc/{appname}rc
-  0. /usr/local/etc/{appname}/config
-  0. ./.{appname}rc
-  0. ../.{appname}rc
-  0. ../../.{appname}rc
-  0. ../../../.{appname}rc
-  0. ...
+    0. ~/.{appname}rc
+    0. ~/.{appname}/config
+    0. ~/.config/{appname}
+    0. ~/.config/{appname}/config
+    0. /etc/{appname}rc
+    0. /etc/{appname}/config
+    0. /usr/local/etc/{appname}rc
+    0. /usr/local/etc/{appname}/config
+    0. ./.{appname}rc
+    0. ../.{appname}rc
+    0. ../../.{appname}rc
+    0. ../../../.{appname}rc
+    0. ...
 
 
 ## Milieu Explain
 Milieu has a feature called explain. It can be used by passing the flag
 `--explain-config` to your program. There are also two methods;
 `milieu.explain()` and `milieu.printExplainTable()`.
-`milieu.explain()` returns an object indicating the origin of each config value. `milieu.printExplainTable()` prints a table to stdout which can be used to
-inspect your config from the cli. This is great for understanding how your
+`milieu.explain()` returns an object indicating the origin of each config
+value. `milieu.printExplainTable()` prints a table to stdout which can be used
+to inspect your config from the cli. This is great for understanding how your
 configuration was resolved, and can be helpful for debugging production systems.
+
+![example](http://i.imgur.com/BzzxMAy.png)
 
 Lets suppose we have a config for our server at `/etc/application-name/config`.
 In it we set the value of `server.port` and nothing else. We also execute our
