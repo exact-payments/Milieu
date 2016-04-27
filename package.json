@@ -1,6 +1,6 @@
 {
   "name": "milieu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A config loader in the spirit of rc with a few additional features",
   "main": "index.js",
   "directories": {
