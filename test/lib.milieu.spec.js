@@ -17,7 +17,7 @@ describe('Milieu', function() {
   beforeEach(function() {
     process.env = {
       APPLICATION__E0: 'e0',
-      HOME           : 'HOME'
+      HOME           : '/home/user'
     };
     process.argv = [
       'node',
@@ -28,16 +28,16 @@ describe('Milieu', function() {
 
     sinon.stub(fs, 'existsSync')
 
-      .withArgs('HOME/.applicationrc')
+      .withArgs('/home/user/.applicationrc')
         .returns(true)
 
-      .withArgs('HOME/.application/config')
+      .withArgs('/home/user/.application/config')
         .returns(true)
 
-      .withArgs('HOME/.config/application')
+      .withArgs('/home/user/.config/application')
         .returns(true)
 
-      .withArgs('HOME/.config/application/config.json')
+      .withArgs('/home/user/.config/application/config.json')
         .returns(true)
 
       .withArgs('/etc/applicationrc.yaml')
@@ -46,13 +46,13 @@ describe('Milieu', function() {
       .withArgs('/etc/application/config.ini')
         .returns(true)
 
-      .withArgs(path.join(process.cwd(), '..', '.applicationrc'))
+      .withArgs('/home/user/developer/project/dist/.applicationrc')
         .returns(true)
 
-      .withArgs(path.join(process.cwd(), '..', '..', '.applicationrc'))
+      .withArgs('/home/user/developer/project/.applicationrc')
         .returns(true)
 
-      .withArgs(path.join(process.cwd(), '..', '..', '..', '.applicationrc'))
+      .withArgs('/home/user/developer/.applicationrc')
         .returns(true);
 
     sinon.stub(fs, 'statSync')
@@ -60,16 +60,16 @@ describe('Milieu', function() {
 
     sinon.stub(fs, 'readFileSync')
 
-      .withArgs('HOME/.applicationrc')
+      .withArgs('/home/user/.applicationrc')
         .returns('{ "c1": "c1" }')
 
-      .withArgs('HOME/.application/config')
+      .withArgs('/home/user/.application/config')
         .returns('c2: c2')
 
-      .withArgs('HOME/.config/application')
+      .withArgs('/home/user/.config/application')
         .returns('c3 = c3')
 
-      .withArgs('HOME/.config/application/config.json')
+      .withArgs('/home/user/.config/application/config.json')
         .returns('{ "c4": "c4" }')
 
       .withArgs('/etc/applicationrc.yaml')
@@ -78,13 +78,13 @@ describe('Milieu', function() {
       .withArgs('/etc/application/config.ini')
         .returns('c6 = c6')
 
-      .withArgs(path.join(process.cwd(), '..', '.applicationrc'))
+      .withArgs('/home/user/developer/project/dist/.applicationrc')
         .returns('{ "c7": "c7" }')
 
-      .withArgs(path.join(process.cwd(), '..', '..', '.applicationrc'))
+      .withArgs('/home/user/developer/project/.applicationrc')
         .returns('{ "c8": "c8" }')
 
-      .withArgs(path.join(process.cwd(), '..', '..', '..', '.applicationrc'))
+      .withArgs('/home/user/developer/.applicationrc')
         .returns('{ "c9": "c9" }');
   });
 
@@ -116,21 +116,23 @@ describe('Milieu', function() {
     it('correctly compiles the explanation and returns it', function() {
       var explanation = (new Milieu('application', {
         c0: 'c0'
+      }, {
+        cwd: '/home/user/developer/project/dist'
       })).explain();
 
       assert.deepEqual(explanation, {
         e0: { val: 'e0', src: 'environment' },
         a0: { val: 'a0', src: 'flag' },
         c0: { val: 'c0', src: 'defaults' },
-        c1: { val: 'c1', src: 'HOME/.applicationrc' },
-        c2: { val: 'c2', src: 'HOME/.application/config' },
-        c3: { val: 'c3', src: 'HOME/.config/application' },
-        c4: { val: 'c4', src: 'HOME/.config/application/config.json' },
+        c1: { val: 'c1', src: '../../../.applicationrc' },
+        c2: { val: 'c2', src: '../../../.application/config' },
+        c3: { val: 'c3', src: '../../../.config/application' },
+        c4: { val: 'c4', src: '../../../.config/application/config.json' },
         c5: { val: 'c5', src: '/etc/applicationrc.yaml' },
         c6: { val: 'c6', src: '/etc/application/config.ini' },
-        c7: { val: 'c7', src: path.join(process.cwd(), '..', '.applicationrc') },
-        c8: { val: 'c8', src: path.join(process.cwd(), '..', '..', '.applicationrc') },
-        c9: { val: 'c9', src: path.join(process.cwd(), '..', '..', '..', '.applicationrc') }
+        c7: { val: 'c7', src: '.applicationrc' },
+        c8: { val: 'c8', src: '../.applicationrc' },
+        c9: { val: 'c9', src: '../../.applicationrc' }
       });
     });
   });
@@ -143,10 +145,12 @@ describe('Milieu', function() {
 
       (new Milieu('application', {
         c0: 'c0'
+      }, {
+        cwd: '/home/user/developer/project/dist'
       })).printExplainTable();
 
       var explainTableSrc = console.log.getCalls().map(function(call) {
-        return call.args[0]
+        return call.args[0];
       }).join('\n');
       console.log.restore();
 
@@ -160,6 +164,8 @@ describe('Milieu', function() {
     it('correctly compiles the config and returns it', function() {
       var config = (new Milieu('application', {
         c0: 'c0'
+      }, {
+        cwd: '/home/user/developer/project/dist'
       })).toObject();
 
       assert.deepEqual(config, {

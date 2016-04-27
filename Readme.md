@@ -58,11 +58,10 @@ priority, and override config values in the sources below.
 
 
 ## Milieu Explain
-Milieu has a feature called explain. It can be used by passing the flag
-`--explain-config` to your program. There are also two methods;
-`milieu.explain()` and `milieu.printExplainTable()`.
-`milieu.explain()` returns an object indicating the origin of each config
-value. `milieu.printExplainTable()` prints a table to stdout which can be used
+Milieu has a feature called explain. There are explain two methods;
+`config.explain()` and `config.printExplainTable()`. `config.explain()` returns
+an object indicating the origin of each config value.
+`config.printExplainTable()` prints a table to stdout which can be used
 to inspect your config from the cli. This is great for understanding how your
 configuration was resolved, and can be helpful for debugging production systems.
 
@@ -76,7 +75,7 @@ contain the origin of each config key as shown below.
 ```javascript
 var milieu = require('milieu');
 
-var explanation = milieu.explain('application-name', {
+var explanation = milieu('application-name', {
   server: {
     port: 8001
   },
@@ -84,7 +83,7 @@ var explanation = milieu.explain('application-name', {
     url: 'mongodb://localhost'
   },
   debug: false
-});
+}).explain();
 
 explanation === {
   server: {
@@ -98,13 +97,13 @@ explanation === {
 ```
 
 If you wish to generate a table on the command line instead of working with an
-explanation object, call `milieu.printExplainTable`.
+explanation object, call `config.printExplainTable`.
 
 ```javascript
 var milieu = require('milieu');
 
 // prints table to stdout
-milieu.printExplainTable('application-name', {
+milieu('application-name', {
   server: {
     port: 8001
   },
@@ -112,7 +111,7 @@ milieu.printExplainTable('application-name', {
     url: 'mongodb://localhost'
   },
   debug: false
-});
+}).printExplainTable();
 ```
 
 
@@ -135,8 +134,8 @@ ENV variables are case insensitive.
 milieuFactory(applicationName String, defaultConfig Object, opts Object) -> config Object
 ```
 
-Internally creates an instance of Milieu instance and returns its compiled
-config object. Accepts a `applicationName` and a `defaultConfig`. It also
+Internally creates an instance of Milieu instance and returns it.
+Accepts a `applicationName` and a `defaultConfig`. It also
 optionally accepts an `opts` object to configure Milieu. See
 [Milieu's load order](#milieu-load-order) to understand how the config object
 is resolved. These does refer to milieuFactory as `milieuFactory` but It is
@@ -165,40 +164,6 @@ var config = milieuFactory('application-name', {
 });
 ```
 
-## milieuFactory.explain
-
-```
-milieuFactory.explain(applicationName String, defaultConfig Object, opts Object) -> explanation Object
-```
-
-Returns an explanation object. Accepts the same arguments as
-[milieuFactory](#milieuFactory).
-
-```javascript
-var milieuFactory = require('milieu');
-
-var explanation = milieuFactory.explain('application-name', {
-  defaultKey: 'value'
-});
-```
-
-## milieuFactory.printExplainTable
-
-```
-milieuFactory.printExplainTable(applicationName String, defaultConfig Object, opts Object)
-```
-
-Prints an explanation table to stdout. Accepts the same arguments as
-[milieuFactory](#milieuFactory).
-
-```javascript
-var milieuFactory = require('milieu');
-
-// prints to stdout
-milieuFactory.printExplainTable('application-name', {
-  defaultKey: 'value'
-});
-```
 
 ## Milieu
 
