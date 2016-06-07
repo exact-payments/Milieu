@@ -1,20 +1,20 @@
+/* globals describe it beforeEach afterEach */
+/* eslint-disable no-new */
 
-var fs       = require('fs');
-var path     = require('path');
-var assert   = require('assert');
-var sinon    = require('sinon');
-var cliTable = require('cli-table2');
-var Milieu   = require('../lib/milieu');
+const fs       = require('fs');
+const assert   = require('assert');
+const sinon    = require('sinon');
+const Milieu   = require('../lib/milieu');
 
-var explainTable = require('./fixture/explain-table');
+const explainTable = require('./fixture/explain-table');
 
 global.__testYaml__ = require('js-yaml');
 global.__testIni__  = require('ini');
 
 
-describe('Milieu', function() {
+describe('Milieu', () => {
 
-  beforeEach(function() {
+  beforeEach(() => {
     process.env = {
       APPLICATION__E0: 'e0',
       HOME           : '/home/user'
@@ -56,7 +56,7 @@ describe('Milieu', function() {
         .returns(true);
 
     sinon.stub(fs, 'statSync')
-      .returns({ isFile: function() { return true; } });
+      .returns({ isFile() { return true; } });
 
     sinon.stub(fs, 'readFileSync')
 
@@ -88,33 +88,33 @@ describe('Milieu', function() {
         .returns('{ "c9": "c9" }');
   });
 
-  afterEach(function() {
+  afterEach(() => {
     fs.existsSync.restore();
     fs.statSync.restore();
     fs.readFileSync.restore();
   });
 
-  it('throws if you don\'t provide an application name', function() {
-    assert.throws(function() {
+  it('throws if you don\'t provide an application name', () => {
+    assert.throws(() => {
       new Milieu();
     });
   });
 
-  it('throws if you don\'t provide a default config object', function() {
-    assert.throws(function() {
+  it('throws if you don\'t provide a default config object', () => {
+    assert.throws(() => {
       new Milieu('testapp');
     });
   });
 
-  it('does not throw if you omit the opts object', function() {
+  it('does not throw if you omit the opts object', () => {
     new Milieu('testApp', {});
   });
 
 
-  describe('#explain', function() {
+  describe('#explain', () => {
 
-    it('correctly compiles the explanation and returns it', function() {
-      var explanation = (new Milieu('application', {
+    it('correctly compiles the explanation and returns it', () => {
+      const explanation = (new Milieu('application', {
         c0: 'c0'
       }, {
         cwd: '/home/user/developer/project/dist'
@@ -138,9 +138,9 @@ describe('Milieu', function() {
   });
 
 
-  describe('#printExplainTable', function() {
+  describe('#printExplainTable', () => {
 
-    it('correctly compiles the and prints the explanation table to stdout (via console)', function() {
+    it('correctly compiles the and prints the explanation table to stdout (via console)', () => {
       sinon.spy(console, 'log');
 
       (new Milieu('application', {
@@ -149,9 +149,7 @@ describe('Milieu', function() {
         cwd: '/home/user/developer/project/dist'
       })).printExplainTable();
 
-      var explainTableSrc = console.log.getCalls().map(function(call) {
-        return call.args[0];
-      }).join('\n');
+      const explainTableSrc = console.log.getCalls().map((call) => call.args[0]).join('\n');
       console.log.restore();
 
       assert.equal(explainTableSrc, explainTable());
@@ -159,10 +157,10 @@ describe('Milieu', function() {
   });
 
 
-  describe('#toObject', function() {
+  describe('#toObject', () => {
 
-    it('correctly compiles the config and returns it', function() {
-      var config = (new Milieu('application', {
+    it('correctly compiles the config and returns it', () => {
+      const config = (new Milieu('application', {
         c0: 'c0'
       }, {
         cwd: '/home/user/developer/project/dist'

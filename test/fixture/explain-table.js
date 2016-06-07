@@ -1,9 +1,7 @@
 
-var fs                  = require('fs');
-var path                = require('path');
-var explainTableSrcPath = path.join(__dirname, 'explain-table.txt');
-var explainTableSrc     = fs.readFileSync(explainTableSrcPath, 'utf8');
+const fs                  = require('fs');
+const path                = require('path');
+const explainTableSrcPath = path.join(__dirname, 'explain-table.txt');
+const explainTableSrc     = fs.readFileSync(explainTableSrcPath, 'utf8');
 
-module.exports = function() {
-  return explainTableSrc;
-};
+module.exports = () => explainTableSrc;

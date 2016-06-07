@@ -1,0 +1,22 @@
+machine:
+  timezone:
+    America/Vancouver
+  node:
+    version: 6.2.0
+
+dependencies:
+  override:
+    - npm install
+    - npm install mocha
+    - npm install mocha-circleci-reporter
+    - npm install coveralls
+    - npm install bithound
+
+test:
+  override:
+    - ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R mocha-circleci-reporter test/*.spec.js
+    - COVERALLS_SERVICE_NAME="circleci" COVERALLS_SERVICE_JOB_ID="$CIRCLE_BUILD_NUM" ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info
+    - ./node_modules/.bin/bithound check $BITHOUND_TOKEN
+  post:
+    - cp test-results.xml $CIRCLE_TEST_REPORTS/
+    - cp -R ./coverage/* $CIRCLE_ARTIFACTS/
