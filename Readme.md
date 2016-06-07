@@ -115,17 +115,6 @@ milieu('application-name', {
 ```
 
 
-## Legacy Support (Deprecated)
-At E-xact our previous configuration loader used a different ENV variable
-scheme. We don't recommend using this scheme, but it can be enabled by setting
-`opts.useLegacyEnvValues` to true when initializing Milieu.
-
-### Migration from Legacy ENV Scheme
-To convert ENV variables by first prefixing their keys with the
-`{appname}__` and replace `_` with `__`. If your keys are camel case
-convert to snake case by adding a `_` before each word. Also ensure that your
-ENV variables are case insensitive.
-
 # API Docs
 
 ## milieuFactory
@@ -151,9 +140,6 @@ interact with `Milieu` constructor or it's instance directly.
   Defaults to `false`.
 - `opts.parseValues` If true, parses strings `'null'`, `'true'`, `'false'`,
   and `'NaN'` into `null`, `true`, `false`, and `NaN`. Defaults to `true`.
-- `opts.useExplainFlag` If set to true Milieu will print the explain table when
-  the flag `--explain-config` is set. Defaults to `true`.
-- `opts.useLegacyEnvValues` Defaults to `false`.
 
 
 ```javascript
