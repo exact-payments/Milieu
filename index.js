@@ -1,5 +1,5 @@
 
-var Milieu = require('./lib/milieu');
+const Milieu = require('./lib/milieu');
 
 
 exports = module.exports = function(applicationName, defaults, opts) {

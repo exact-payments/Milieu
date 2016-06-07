@@ -160,11 +160,11 @@ describe('Milieu', () => {
   describe('#toObject', () => {
 
     it('correctly compiles the config and returns it', () => {
-      const config = (new Milieu('application', {
-        c0: 'c0'
-      }, {
-        cwd: '/home/user/developer/project/dist'
-      })).toObject();
+      const config = (new Milieu(
+        'application',
+        { c0 : 'c0' },
+        { cwd: '/home/user/developer/project/dist' }
+      )).toObject();
 
       assert.deepEqual(config, {
         e0: 'e0',
