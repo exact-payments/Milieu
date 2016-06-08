@@ -4,7 +4,7 @@
 One could say it is one's milieu that shapes their furture
 ![](http://i.imgur.com/FgRHMFQ.jpg)
 
-[![CircleCI](https://circleci.com/gh/fintechdev/Milieu.svg?style=svg)](https://circleci.com/gh/fintechdev/Milieu)
+[![CircleCI](https://circleci.com/gh/fintechdev/Milieu.svg?style=svg&circle-token=0fa9d2407ebf0612d0b956f5e50d07073fca8739)](https://circleci.com/gh/fintechdev/Milieu)
 [![Coverage Status](https://coveralls.io/repos/github/fintechdev/Milieu/badge.svg?branch=master&t=kdFCIW)](https://coveralls.io/github/fintechdev/Milieu?branch=master)
 [![bitHound Overall Score](https://www.bithound.io/projects/badges/d6f4b7b0-2cdf-11e6-9be6-03a936f30e40/score.svg)](https://www.bithound.io/github/fintechdev/Milieu)
 [![bitHound Dependencies](https://www.bithound.io/projects/badges/d6f4b7b0-2cdf-11e6-9be6-03a936f30e40/dependencies.svg)](https://www.bithound.io/github/fintechdev/Milieu/master/dependencies/npm)
