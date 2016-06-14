@@ -49,7 +49,7 @@ priority, and override config values in the sources below.
 
 0. argv flags - Ex. `--test.myKey=val` becomes `config.test.myKey === 'val'`
    in the config. Anything after -- is ignored.
-0. environment variables - Ex. `TEST__MY_KEY="val"` becomes
+0. environment variables - Ex. `APPLICATION_NAME__TEST__MY_KEY="val"` becomes
    `config.test.myKey === 'val'`
 0. config files (replace {appname} with the name of your application)
   (Accepts JSON, INI, or YAML) (File extensions are optional)
