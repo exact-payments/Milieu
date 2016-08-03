@@ -1,7 +1,7 @@
 
 # Milieu
 
-One could say it is one's milieu that shapes their furture
+One could say it is one's milieu that shapes their future
 ![](http://i.imgur.com/FgRHMFQ.jpg)
 
 [![CircleCI](https://circleci.com/gh/fintechdev/Milieu.svg?style=svg&circle-token=0fa9d2407ebf0612d0b956f5e50d07073fca8739)](https://circleci.com/gh/fintechdev/Milieu)
