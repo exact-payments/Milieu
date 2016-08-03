@@ -73,7 +73,7 @@ Milieu provides both file and environment variable templating. It also provides
 syntax for type casting. Below are a few examples.
 
 To load values from a file use the `$(path/to/file)` syntax. If the path is not
-absolute, it will be relative to the current working directly. You can use
+absolute, it will be relative to the current working directory. You can use
 these tokens as many times as you need within a single value.
 
 ```javascript
