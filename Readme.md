@@ -68,6 +68,42 @@ priority, and override config values in the sources below.
     0. ...
 
 
+## Milieu Templating and Type Casting
+Milieu provides both file and environment variable templating. It also provides
+syntax for type casting. Below are a few examples.
+
+To load values from a file use the `$(path/to/file)` syntax. If the path is not
+absolute, it will be relative to the current working directly. You can use
+these tokens as many times as you need within a single value.
+
+```javascript
+var config = milieu('application-name', {
+  specialFile: 'part1: $(path/to/specialFile-part-1.txt)\npart2: $(path/to/specialFile-part-2.txt)'
+});
+```
+
+To load values from environment variables use the `${VAR_NAME}` syntax. You can
+use these tokens as many times as you need within a single value.
+
+```javascript
+var config = milieu('application-name', {
+  secretTokens: '1:${SECRET_TOKEN_1}2:${SECRET_TOKEN_2}3:${SECRET_TOKEN_3}'
+});
+```
+
+Finally to type cast use the `number:1000` syntax. This is useful for
+typecasting values from an ini file, or values that are from environment
+variables. Note that this will work for `string`, `number`, and `boolean` types.
+Note that type casts must always be placed at the beginning of the value to work.
+
+```javascript
+var config = milieu('application-name', {
+  secretNumber: 'number:${SECRET_NUMBER}'
+  secretBool  : 'bool:${SECRET_BOOL}'
+});
+```
+
+
 ## Milieu Explain
 Milieu has a feature called explain. There are explain two methods;
 `config.explain()` and `config.printExplainTable()`. `config.explain()` returns
