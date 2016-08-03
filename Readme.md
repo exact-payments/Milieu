@@ -99,7 +99,7 @@ Note that type casts must always be placed at the beginning of the value to work
 ```javascript
 var config = milieu('application-name', {
   secretNumber: 'number:${SECRET_NUMBER}'
-  secretBool  : 'bool:${SECRET_BOOL}'
+  secretBool  : 'boolean:${SECRET_BOOL}'
 });
 ```
 
