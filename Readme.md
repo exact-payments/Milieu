@@ -4,12 +4,13 @@
 One could say it is one's milieu that shapes their future
 ![](http://i.imgur.com/FgRHMFQ.jpg)
 
-[![CircleCI](https://circleci.com/gh/fintechdev/Milieu.svg?style=svg&circle-token=0fa9d2407ebf0612d0b956f5e50d07073fca8739)](https://circleci.com/gh/fintechdev/Milieu)
-[![Coverage Status](https://coveralls.io/repos/github/fintechdev/Milieu/badge.svg?branch=master&t=kdFCIW)](https://coveralls.io/github/fintechdev/Milieu?branch=master)
-[![bitHound Overall Score](https://www.bithound.io/projects/badges/d6f4b7b0-2cdf-11e6-9be6-03a936f30e40/score.svg)](https://www.bithound.io/github/fintechdev/Milieu)
-[![bitHound Dependencies](https://www.bithound.io/projects/badges/d6f4b7b0-2cdf-11e6-9be6-03a936f30e40/dependencies.svg)](https://www.bithound.io/github/fintechdev/Milieu/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/projects/badges/d6f4b7b0-2cdf-11e6-9be6-03a936f30e40/devDependencies.svg)](https://www.bithound.io/github/fintechdev/Milieu/master/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/projects/badges/d6f4b7b0-2cdf-11e6-9be6-03a936f30e40/code.svg)](https://www.bithound.io/github/fintechdev/Milieu)
+[![npm](https://img.shields.io/npm/v/milieu.svg?maxAge=2592000?style=flat-square)]()
+[![CircleCI](https://img.shields.io/circleci/project/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square)](https://circleci.com/gh/fintechdev/Milieu)
+[![Coveralls](https://img.shields.io/coveralls/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square)](https://coveralls.io/github/fintechdev/Milieu?branch=master)
+[![bitHound](https://img.shields.io/bithound/code/github/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square)](https://www.bithound.io/github/fintechdev/Milieu)
+[![bitHound Dependencies](https://img.shields.io/bithound/dependencies/github/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square)](https://www.bithound.io/github/fintechdev/Milieu/master/dependencies/npm)
+[![bitHound Dependencies](https://img.shields.io/bithound/devDependencies/github/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square)](https://www.bithound.io/github/fintechdev/Milieu/master/dependencies/npm)
+
 
 
 Milieu is a config loader in the spirit of
