@@ -11,7 +11,13 @@ One could say it is one's milieu that shapes their future
 [![bitHound Dependencies](https://img.shields.io/bithound/dependencies/github/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square)](https://www.bithound.io/github/fintechdev/Milieu/master/dependencies/npm)
 [![bitHound Dependencies](https://img.shields.io/bithound/devDependencies/github/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square)](https://www.bithound.io/github/fintechdev/Milieu/master/dependencies/npm)
 
+## Install with NPM
 
+```shell
+npm install milieu
+```
+
+## Introduction
 
 Milieu is a config loader in the spirit of
 [rc](https://github.com/dominictarr/rc) It shares the same features as RC, but
