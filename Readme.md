@@ -4,7 +4,7 @@
 One could say it is one's milieu that shapes their future
 ![](http://i.imgur.com/FgRHMFQ.jpg)
 
-[![npm](https://img.shields.io/npm/v/milieu.svg?maxAge=2592000?style=flat-square)]()
+[![npm](https://img.shields.io/npm/v/milieu.svg?maxAge=2592000?style=flat-square)](https://www.npmjs.com/package/milieu)
 [![CircleCI](https://img.shields.io/circleci/project/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square)](https://circleci.com/gh/fintechdev/Milieu)
 [![Coveralls](https://img.shields.io/coveralls/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square)](https://coveralls.io/github/fintechdev/Milieu?branch=master)
 [![bitHound](https://img.shields.io/bithound/code/github/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square)](https://www.bithound.io/github/fintechdev/Milieu)
