@@ -98,15 +98,15 @@ var config = milieu('application-name', {
 });
 ```
 
-Finally to type cast use the `number:1000` syntax. This is useful for
-typecasting values from an ini file, or values that are from environment
-variables. Note that this will work for `string`, `number`, and `boolean` types.
-Note that type casts must always be placed at the beginning of the value to work.
+Type casting can be achieved with filters. To cast a value simply add the type
+name and a colon to the beginning of your string. Types supported are `number`
+and `boolean`. JSON can also be parsed using `json` as the type.
 
 ```javascript
 var config = milieu('application-name', {
   secretNumber: 'number:${SECRET_NUMBER}'
   secretBool  : 'boolean:${SECRET_BOOL}'
+  secretObj   : 'json:${SECRET_JSON}'
 });
 ```
 

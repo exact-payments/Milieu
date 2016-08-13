@@ -22,7 +22,8 @@ describe('Milieu', () => {
     process.argv = [
       'node',
       '/path/to/script',
-      '--a0=a0'
+      '--a0',
+      'a0'
     ];
     process.platform = 'darwin';
 
