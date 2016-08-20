@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Milieu by fintechdev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Milieu</h1>
+      <h2 class="project-tagline">Milieu is a config loader in the spirit of rc It shares the same features as RC, but goes a few steps further.</h2>
+      <a href="https://github.com/fintechdev/Milieu" class="btn">View on GitHub</a>
+      <a href="https://github.com/fintechdev/Milieu/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/fintechdev/Milieu/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="milieu" class="anchor" href="#milieu" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Milieu</h1>
+
+<p>One could say it is one's milieu that shapes their future
+<img src="http://i.imgur.com/FgRHMFQ.jpg" alt=""></p>
+
+<p><a href="https://www.npmjs.com/package/milieu"><img src="https://img.shields.io/npm/v/milieu.svg?maxAge=2592000?style=flat-square" alt="npm"></a>
+<a href="https://circleci.com/gh/fintechdev/Milieu"><img src="https://img.shields.io/circleci/project/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square" alt="CircleCI"></a>
+<a href="https://coveralls.io/github/fintechdev/Milieu?branch=master"><img src="https://img.shields.io/coveralls/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square" alt="Coveralls"></a>
+<a href="https://www.bithound.io/github/fintechdev/Milieu"><img src="https://img.shields.io/bithound/code/github/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square" alt="bitHound"></a>
+<a href="https://www.bithound.io/github/fintechdev/Milieu/master/dependencies/npm"><img src="https://img.shields.io/bithound/dependencies/github/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square" alt="bitHound Dependencies"></a>
+<a href="https://www.bithound.io/github/fintechdev/Milieu/master/dependencies/npm"><img src="https://img.shields.io/bithound/devDependencies/github/fintechdev/Milieu.svg?maxAge=2592000?style=flat-square" alt="bitHound Dependencies"></a></p>
+
+<h2>
+<a id="install-with-npm" class="anchor" href="#install-with-npm" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install with NPM</h2>
+
+<div class="highlight highlight-source-shell"><pre>npm install milieu</pre></div>
+
+<h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>Milieu is a config loader in the spirit of
+<a href="https://github.com/dominictarr/rc">rc</a> It shares the same features as RC, but
+goes a few steps further.</p>
+
+<p>Milieu loads config values from argv flags, environment variables, and config
+files. The values are compiled into a single config object which you can use
+in your application. You can trace the sources of these values using Milieu's
+explain feature.</p>
+
+<p>Milieu can parse JSON config files out of the box. You can also use INI and YAML
+files by installing the optional dependencies
+<a href="https://github.com/isaacs/ini">ini</a> and/or
+<a href="https://github.com/nodeca/js-yaml">js-yaml</a> modules.</p>
+
+<blockquote>
+<p>The word milieu is defined as the physical or social setting in which people
+live or in which something happens or develops.</p>
+</blockquote>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> milieu <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>milieu<span class="pl-pds">'</span></span>);
+
+<span class="pl-k">var</span> config <span class="pl-k">=</span> <span class="pl-en">milieu</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  server<span class="pl-k">:</span> {
+    port<span class="pl-k">:</span> <span class="pl-c1">8001</span>
+  },
+  mongo<span class="pl-k">:</span> {
+    url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>mongodb://localhost<span class="pl-pds">'</span></span>
+  }
+});</pre></div>
+
+<h3>
+<a id="milieu-compile-order" class="anchor" href="#milieu-compile-order" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Milieu Compile Order</h3>
+
+<p>Milieu looks in the following places and compiles a config by merging upward
+through the following sources. Items highest in the list get the highest
+priority, and override config values in the sources below.</p>
+
+<ol>
+<li>argv flags - Ex. <code>--test.myKey=val</code> becomes <code>config.test.myKey === 'val'</code>
+in the config. Anything after -- is ignored.</li>
+<li>environment variables - Ex. <code>APPLICATION_NAME__TEST__MY_KEY="val"</code> becomes
+<code>config.test.myKey === 'val'</code>
+</li>
+<li>config files (replace {appname} with the name of your application)
+(Accepts JSON, INI, or YAML) (File extensions are optional)
+
+<ol>
+<li>~/.{appname}rc</li>
+<li>~/.{appname}/config</li>
+<li>~/.config/{appname}</li>
+<li>~/.config/{appname}/config</li>
+<li>/etc/{appname}rc</li>
+<li>/etc/{appname}/config</li>
+<li>/usr/local/etc/{appname}rc</li>
+<li>/usr/local/etc/{appname}/config</li>
+<li>./.{appname}rc</li>
+<li>../.{appname}rc</li>
+<li>../../.{appname}rc</li>
+<li>../../../.{appname}rc</li>
+<li>...</li>
+</ol>
+</li>
+</ol>
+
+<h2>
+<a id="milieu-templating-and-type-casting" class="anchor" href="#milieu-templating-and-type-casting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Milieu Templating and Type Casting</h2>
+
+<p>Milieu provides both file and environment variable templating. It also provides
+syntax for type casting. Below are a few examples.</p>
+
+<p>To load values from a file use the <code>$(path/to/file)</code> syntax. If the path is not
+absolute, it will be relative to the current working directory. You can use
+these tokens as many times as you need within a single value.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> config <span class="pl-k">=</span> <span class="pl-en">milieu</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  specialFile<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>part1: $(path/to/specialFile-part-1.txt)<span class="pl-cce">\n</span>part2: $(path/to/specialFile-part-2.txt)<span class="pl-pds">'</span></span>
+});</pre></div>
+
+<p>To load values from environment variables use the <code>${VAR_NAME}</code> syntax. You can
+use these tokens as many times as you need within a single value.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> config <span class="pl-k">=</span> <span class="pl-en">milieu</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  secretTokens<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>1:${SECRET_TOKEN_1}2:${SECRET_TOKEN_2}3:${SECRET_TOKEN_3}<span class="pl-pds">'</span></span>
+});</pre></div>
+
+<p>Type casting can be achieved with filters. To cast a value simply add the type
+name and a colon to the beginning of your string. Types supported are <code>number</code>
+and <code>boolean</code>. JSON can also be parsed using <code>json</code> as the type.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> config <span class="pl-k">=</span> <span class="pl-en">milieu</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  secretNumber<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>number:${SECRET_NUMBER}<span class="pl-pds">'</span></span>
+  secretBool  <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>boolean:${SECRET_BOOL}<span class="pl-pds">'</span></span>
+  secretObj   <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>json:${SECRET_JSON}<span class="pl-pds">'</span></span>
+});</pre></div>
+
+<h2>
+<a id="milieu-explain" class="anchor" href="#milieu-explain" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Milieu Explain</h2>
+
+<p>Milieu has a feature called explain. There are explain two methods;
+<code>config.explain()</code> and <code>config.printExplainTable()</code>. <code>config.explain()</code> returns
+an object indicating the origin of each config value.
+<code>config.printExplainTable()</code> prints a table to stdout which can be used
+to inspect your config from the cli. This is great for understanding how your
+configuration was resolved, and can be helpful for debugging production systems.</p>
+
+<p><img src="http://i.imgur.com/BzzxMAy.png" alt="example"></p>
+
+<p>Lets suppose we have a config for our server at <code>/etc/application-name/config</code>.
+In it we set the value of <code>server.port</code> and nothing else. We also execute our
+application below passing the flag <code>--debug true</code>. Our explanation object will
+contain the origin of each config key as shown below.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> milieu <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>milieu<span class="pl-pds">'</span></span>);
+
+<span class="pl-k">var</span> explanation <span class="pl-k">=</span> <span class="pl-en">milieu</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  server<span class="pl-k">:</span> {
+    port<span class="pl-k">:</span> <span class="pl-c1">8001</span>
+  },
+  mongo<span class="pl-k">:</span> {
+    url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>mongodb://localhost<span class="pl-pds">'</span></span>
+  },
+  debug<span class="pl-k">:</span> <span class="pl-c1">false</span>
+}).<span class="pl-en">explain</span>();
+
+explanation <span class="pl-k">===</span> {
+  server<span class="pl-k">:</span> {
+    port<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>/etc/application-name/config<span class="pl-pds">'</span></span>
+  },
+  mongo<span class="pl-k">:</span> {
+    url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span>
+  },
+  debug<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>flag<span class="pl-pds">'</span></span>
+}</pre></div>
+
+<p>If you wish to generate a table on the command line instead of working with an
+explanation object, call <code>config.printExplainTable</code>.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> milieu <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>milieu<span class="pl-pds">'</span></span>);
+
+<span class="pl-c">// prints table to stdout</span>
+<span class="pl-en">milieu</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  server<span class="pl-k">:</span> {
+    port<span class="pl-k">:</span> <span class="pl-c1">8001</span>
+  },
+  mongo<span class="pl-k">:</span> {
+    url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>mongodb://localhost<span class="pl-pds">'</span></span>
+  },
+  debug<span class="pl-k">:</span> <span class="pl-c1">false</span>
+}).<span class="pl-en">printExplainTable</span>();</pre></div>
+
+<h1>
+<a id="api-docs" class="anchor" href="#api-docs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API Docs</h1>
+
+<h2>
+<a id="milieufactory" class="anchor" href="#milieufactory" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>milieuFactory</h2>
+
+<pre><code>milieuFactory(applicationName String, defaultConfig Object, opts Object) -&gt; config Object
+</code></pre>
+
+<p>Internally creates an instance of Milieu instance and returns it.
+Accepts a <code>applicationName</code> and a <code>defaultConfig</code>. It also
+optionally accepts an <code>opts</code> object to configure Milieu. See
+<a href="#milieu-load-order">Milieu's load order</a> to understand how the config object
+is resolved. These does refer to milieuFactory as <code>milieuFactory</code> but It is
+recommended that the name <code>milieu</code> be used instead as most users will not
+interact with <code>Milieu</code> constructor or it's instance directly.</p>
+
+<h3>
+<a id="milieu-options" class="anchor" href="#milieu-options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Milieu Options</h3>
+
+<ul>
+<li>
+<code>opts.argv</code> Pass a custom argv array. Defaults to <code>process.argv</code>.</li>
+<li>
+<code>opts.env</code>  Pass a custom env object. Defaults to <code>process.env</code>.</li>
+<li>
+<code>opts.platform</code>  Pass a custom platform string. Defaults to
+<code>process.platform</code>.</li>
+<li>
+<code>opts.unsetEnvValues</code> If true, deletes env values that belong to the config.
+Defaults to <code>false</code>.</li>
+<li>
+<code>opts.parseValues</code> If true, parses strings <code>'null'</code>, <code>'true'</code>, <code>'false'</code>,
+and <code>'NaN'</code> into <code>null</code>, <code>true</code>, <code>false</code>, and <code>NaN</code>. Defaults to <code>true</code>.</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> milieuFactory <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>milieu<span class="pl-pds">'</span></span>);
+
+<span class="pl-k">var</span> config <span class="pl-k">=</span> <span class="pl-en">milieuFactory</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  defaultKey<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>value<span class="pl-pds">'</span></span>
+});</pre></div>
+
+<h2>
+<a id="milieu-1" class="anchor" href="#milieu-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Milieu</h2>
+
+<pre><code>new Milieu(applicationName String, defaultConfig Object, opts Object) -&gt; Milieu
+</code></pre>
+
+<p>The Milieu constructor. Accepts the same arguments as
+<a href="#milieuFactory">milieuFactory</a>.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> Milieu <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>milieu<span class="pl-pds">'</span></span>).<span class="pl-smi">Milieu</span>;
+
+<span class="pl-k">var</span> milieu <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Milieu</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  defaultKey<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>value<span class="pl-pds">'</span></span>
+});</pre></div>
+
+<h2>
+<a id="milieutoobject" class="anchor" href="#milieutoobject" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Milieu#toObject</h2>
+
+<pre><code>milieu.toObject() -&gt; config Object
+</code></pre>
+
+<p>Resolves the config object. Use this method to retrieve your config if using a
+Milieu instance directly.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> Milieu <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>milieu<span class="pl-pds">'</span></span>).<span class="pl-smi">Milieu</span>;
+
+<span class="pl-k">var</span> milieu <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Milieu</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  defaultKey<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>value<span class="pl-pds">'</span></span>
+});
+
+<span class="pl-k">var</span> config <span class="pl-k">=</span> <span class="pl-smi">milieu</span>.<span class="pl-en">toObject</span>();</pre></div>
+
+<h2>
+<a id="milieuexplain" class="anchor" href="#milieuexplain" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Milieu#explain</h2>
+
+<pre><code>milieu.explain() -&gt; explanation Object
+</code></pre>
+
+<p>Returns an explanation object.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> Milieu <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>milieu<span class="pl-pds">'</span></span>).<span class="pl-smi">Milieu</span>;
+
+<span class="pl-k">var</span> milieu <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Milieu</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  defaultKey<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>value<span class="pl-pds">'</span></span>
+});
+
+<span class="pl-k">var</span> explanation <span class="pl-k">=</span> <span class="pl-smi">milieu</span>.<span class="pl-en">explain</span>();</pre></div>
+
+<h2>
+<a id="milieuprintexplaintable" class="anchor" href="#milieuprintexplaintable" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Milieu#printExplainTable</h2>
+
+<pre><code>milieu.explain() -&gt; explanation Object
+</code></pre>
+
+<p>Prints an explanation table to stdout.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> Milieu <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>milieu<span class="pl-pds">'</span></span>).<span class="pl-smi">Milieu</span>;
+
+<span class="pl-k">var</span> milieu <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Milieu</span>(<span class="pl-s"><span class="pl-pds">'</span>application-name<span class="pl-pds">'</span></span>, {
+  defaultKey<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>value<span class="pl-pds">'</span></span>
+});
+
+<span class="pl-c">// prints to stdout</span>
+<span class="pl-smi">milieu</span>.<span class="pl-en">printExplainTable</span>();</pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/fintechdev/Milieu">Milieu</a> is maintained by <a href="https://github.com/fintechdev">fintechdev</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
