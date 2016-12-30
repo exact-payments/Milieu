@@ -30,7 +30,8 @@
   "dependencies": {
     "cli-table2": "^0.2.0",
     "colors": "^1.1.2",
-    "deep-extend": "^0.4.0"
+    "deep-extend": "^0.4.0",
+    "eslint": "^3.12.2"
   },
   "devDependencies": {
     "eslint": "^3.12.2",
