@@ -60,19 +60,19 @@ priority, and override config values in the sources below.
    `config.test.myKey === 'val'`
 0. config files (replace {appname} with the name of your application)
   (Accepts JSON, INI, or YAML) (File extensions are optional)
-    0. ~/.{appname}rc
-    0. ~/.{appname}/config
-    0. ~/.config/{appname}
-    0. ~/.config/{appname}/config
-    0. /etc/{appname}rc
-    0. /etc/{appname}/config
-    0. /usr/local/etc/{appname}rc
-    0. /usr/local/etc/{appname}/config
-    0. ./.{appname}rc
-    0. ../.{appname}rc
-    0. ../../.{appname}rc
-    0. ../../../.{appname}rc
-    0. ...
+  0. ~/.{appname}rc
+  0. ~/.{appname}/config
+  0. ~/.config/{appname}
+  0. ~/.config/{appname}/config
+  0. /etc/{appname}rc
+  0. /etc/{appname}/config
+  0. /usr/local/etc/{appname}rc
+  0. /usr/local/etc/{appname}/config
+  0. ./.{appname}rc
+  0. ../.{appname}rc
+  0. ../../.{appname}rc
+  0. ../../../.{appname}rc
+  0. ...
 
 
 ## Milieu Templating and Type Casting
