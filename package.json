@@ -1,6 +1,6 @@
 {
   "name": "milieu",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "A config loader in the spirit of rc with a few additional features",
   "main": "index.js",
   "directories": {
@@ -31,11 +31,11 @@
     "cli-table2": "^0.2.0",
     "colors": "^1.1.2",
     "deep-extend": "^0.4.0",
-    "eslint": "^3.12.2"
+    "eslint": "^4.14.0"
   },
   "devDependencies": {
-    "eslint": "^3.12.2",
-    "eslint-config-x2": "^2.0.0",
+    "eslint": "^4.14.0",
+    "eslint-config-x2": "^3.0.0",
     "istanbul": "^0.4.4",
     "mocha": "^3.0.0",
     "pre-commit": "^1.2.2",
